@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <View style={styles.maincontainer}>
-      <View style={styles.displayContainer}>
+      <View style={styles.resultConatiner}>
         <Text style={styles.displayText}>{displayValue}</Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  displayContainer: {
+  resultConatiner: {
     marginTop: 30,
     flex: 2,
     justifyContent: 'flex-end',
