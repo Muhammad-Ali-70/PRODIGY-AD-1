@@ -7,15 +7,18 @@ export default function App() {
   const [displayValue, setDisplayValue] = useState('0');
   const [operator, setOperator] = useState<string | null>(null);
   const [firstValue, setFirstValue] = useState('');
+  const [currentExpression, setCurrentExpression] = useState('');
 
   const handleNumberInput = (num: number) => {
     setDisplayValue(displayValue === '0' ? num.toString() : displayValue + num);
+    setCurrentExpression(currentExpression === '0' ? num.toString() : currentExpression + num);
   };
 
   const handleOperatorInput = (op: string) => {
     setOperator(op);
     setFirstValue(displayValue);
     setDisplayValue('0');
+    setCurrentExpression(currentExpression + ' ' + op + ' ');
   };
 
   const handleEqual = () => {
@@ -24,6 +27,7 @@ export default function App() {
 
     if (operator === '/' && num2 === 0) {
       setDisplayValue('Error');
+      setCurrentExpression('');
     } else {
       const result =
         operator === '+'
@@ -37,6 +41,7 @@ export default function App() {
                 : displayValue;
 
       setDisplayValue(result.toString());
+      setCurrentExpression(result.toString());
     }
 
     setOperator(null);
@@ -47,11 +52,13 @@ export default function App() {
     setDisplayValue('0');
     setOperator(null);
     setFirstValue('');
+    setCurrentExpression('');
   };
 
   return (
     <View style={styles.maincontainer}>
-      <View style={styles.resultConatiner}>
+      <View style={styles.resultContainer}>
+        <Text style={styles.expressionText}>{currentExpression}</Text>
         <Text style={styles.displayText}>{displayValue}</Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  resultConatiner: {
+  resultContainer: {
     marginTop: 30,
     flex: 2,
     justifyContent: 'flex-end',
@@ -125,6 +132,11 @@ const styles = StyleSheet.create({
   displayText: {
     fontSize: 64,
     color: '#ffffff',
+  },
+  expressionText: {
+    fontSize: 32,
+    color: '#ffffff',
+    marginBottom: 10,
   },
   buttonContainer: {
     flex: 3,
