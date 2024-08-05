@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project is a sleek, responsive calculator app developed using React Native CLI. It performs basic arithmetic operations and is designed with a modern, user-friendly interface.
+This project is a sleek, responsive calculator app developed using React Native CLI (Typescript). It performs basic arithmetic operations and is designed with a modern, user-friendly interface.
 
 ## Track Code
 
