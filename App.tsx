@@ -50,7 +50,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.maincontainer}>
       <View style={styles.displayContainer}>
         <Text style={styles.displayText}>{displayValue}</Text>
       </View>
@@ -105,7 +105,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  maincontainer: {
     flex: 1,
     backgroundColor: '#1c1c1e',
     alignItems: 'center',
