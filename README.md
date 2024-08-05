@@ -1,10 +1,10 @@
-# Calculator App
+# Calculator App 🧮
 
 ### A React Native Project by Prodigy Infotech
 
 ## Overview
 
-This project is a sleek, responsive calculator app developed using React Native CLI. It performs basic arithmetic operations and is designed with a modern, user-friendly interface.
+This project is a sleek, responsive calculator app developed using React Native CLI (Typescript). It performs basic arithmetic operations and is designed with a modern, user-friendly interface.
 
 ## Track Code
 
@@ -16,10 +16,10 @@ The objective of this task was to create a calculator app that can perform basic
 
 ## Features
 
-- **Basic Arithmetic Operations:** Addition, subtraction, multiplication, and division.
-- **Responsive Design:** Adapts to different screen sizes for optimal user experience.
-- **Modern UI:** Clean and intuitive user interface with professional styling.
-- **Error Handling:** Displays an error message when attempting to divide by zero.
+- **Basic Arithmetic Operations:** ➕ Addition, ➖ subtraction, ✖️ multiplication, and ➗ division.
+- **Responsive Design:** 📱 Adapts to different screen sizes for optimal user experience.
+- **Modern UI:** 🖌️ Clean and intuitive user interface with professional styling.
+- **Error Handling:** 🚫 Displays an error message when attempting to divide by zero.
 
 ## Technologies Used
 
