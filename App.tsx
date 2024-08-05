@@ -1,118 +1,194 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const { width } = Dimensions.get('window');
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default function App() {
+  const [displayValue, setDisplayValue] = useState('0');
+  const [operator, setOperator] = useState<string | null>(null);
+  const [firstValue, setFirstValue] = useState('');
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  const handleNumberInput = (num: number) => {
+    setDisplayValue(displayValue === '0' ? num.toString() : displayValue + num);
+  };
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const handleOperatorInput = (op: string) => {
+    setOperator(op);
+    setFirstValue(displayValue);
+    setDisplayValue('0');
+  };
+
+  const handleEqual = () => {
+    const num1 = parseFloat(firstValue);
+    const num2 = parseFloat(displayValue);
+
+    if (operator === '/' && num2 === 0) {
+      setDisplayValue('Error');
+    } else {
+      const result =
+        operator === '+'
+          ? num1 + num2
+          : operator === '-'
+            ? num1 - num2
+            : operator === '*'
+              ? num1 * num2
+              : operator === '/'
+                ? num1 / num2
+                : displayValue;
+
+      setDisplayValue(result.toString());
+    }
+
+    setOperator(null);
+    setFirstValue('');
+  };
+
+  const handleClear = () => {
+    setDisplayValue('0');
+    setOperator(null);
+    setFirstValue('');
+  };
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.container}>
+      <View style={styles.displayContainer}>
+        <Text style={styles.displayText}>{displayValue}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <View style={styles.row}>
+          {[7, 8, 9].map((num) => (
+            <TouchableOpacity key={num} style={styles.button} onPress={() => handleNumberInput(num)}>
+              <Text style={styles.buttonText}>{num}</Text>
+            </TouchableOpacity>
+          ))}
+          <TouchableOpacity style={[styles.button, styles.operatorButton]} onPress={() => handleOperatorInput('/')}>
+            <Text style={[styles.buttonText, styles.operatorButtonText]}>÷</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
+          {[4, 5, 6].map((num) => (
+            <TouchableOpacity key={num} style={styles.button} onPress={() => handleNumberInput(num)}>
+              <Text style={styles.buttonText}>{num}</Text>
+            </TouchableOpacity>
+          ))}
+          <TouchableOpacity style={[styles.button, styles.operatorButton]} onPress={() => handleOperatorInput('*')}>
+            <Text style={[styles.buttonText, styles.operatorButtonText]}>×</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
+          {[1, 2, 3].map((num) => (
+            <TouchableOpacity key={num} style={styles.button} onPress={() => handleNumberInput(num)}>
+              <Text style={styles.buttonText}>{num}</Text>
+            </TouchableOpacity>
+          ))}
+          <TouchableOpacity style={[styles.button, styles.operatorButton]} onPress={() => handleOperatorInput('-')}>
+            <Text style={[styles.buttonText, styles.operatorButtonText]}>−</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
+          <TouchableOpacity style={[styles.button, styles.zeroButton]} onPress={() => handleNumberInput(0)}>
+            <Text style={styles.buttonText}>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.operatorButton]} onPress={() => handleOperatorInput('+')}>
+            <Text style={[styles.buttonText, styles.operatorButtonText]}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.equalButton]} onPress={handleEqual}>
+            <Text style={[styles.buttonText, styles.equalButtonText]}>=</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
+          <Text style={styles.clearButtonText}>C</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#1c1c1e',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  displayContainer: {
+    marginTop: 30,
+    flex: 2,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    width: '90%',
+    paddingRight: 20,
+    paddingBottom: 20,
+    backgroundColor: '#666666',
+    borderRadius: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  displayText: {
+    fontSize: 64,
+    color: '#ffffff',
   },
-  highlight: {
-    fontWeight: '700',
+  buttonContainer: {
+    flex: 3,
+    width: '90%',
+    marginTop: 20,
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  button: {
+    flex: 1,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#666666',
+    margin: 5,
+    padding: 20,
+  },
+  buttonText: {
+    fontSize: 28,
+    color: '#ffffff',
+  },
+  zeroButton: {
+    flex: 2,
+    alignItems: 'flex-start',
+    paddingLeft: 70,
+  },
+  operatorButton: {
+    flex: 1,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ff9500',
+    margin: 5,
+    padding: 20,
+  },
+  operatorButtonText: {
+    color: '#ffffff',
+  },
+  equalButton: {
+    flex: 1,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ff9500',
+    margin: 5,
+    padding: 20,
+  },
+  equalButtonText: {
+    color: '#ffffff',
+  },
+  clearButton: {
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ff3b30',
+    marginTop: 10,
+    padding: 20,
+  },
+  clearButtonText: {
+    fontSize: 28,
+    color: '#ffffff',
   },
 });
-
-export default App;
