@@ -1,4 +1,4 @@
-# Calculator App
+# Calculator App 🧮
 
 ### A React Native Project by Prodigy Infotech
 
@@ -16,10 +16,10 @@ The objective of this task was to create a calculator app that can perform basic
 
 ## Features
 
-- **Basic Arithmetic Operations:** Addition, subtraction, multiplication, and division.
-- **Responsive Design:** Adapts to different screen sizes for optimal user experience.
-- **Modern UI:** Clean and intuitive user interface with professional styling.
-- **Error Handling:** Displays an error message when attempting to divide by zero.
+- **Basic Arithmetic Operations:** ➕ Addition, ➖ subtraction, ✖️ multiplication, and ➗ division.
+- **Responsive Design:** 📱 Adapts to different screen sizes for optimal user experience.
+- **Modern UI:** 🖌️ Clean and intuitive user interface with professional styling.
+- **Error Handling:** 🚫 Displays an error message when attempting to divide by zero.
 
 ## Technologies Used
 
