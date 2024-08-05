@@ -33,3 +33,27 @@ The objective of this task was to create a calculator app that can perform basic
    ```bash
    git clone https://github.com/your-username/calculator-app.git
    ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd calculator-app
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Run the app:
+   ```bash
+   npx react-native run-android
+   ```
+
+## Learnings
+This project provided valuable hands-on experience in:
+
+- Building and styling components in React Native.
+- Handling state and user inputs.
+- Implementing basic arithmetic logic.
+- Error handling and validation.
+
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request for any feature additions or improvements.
