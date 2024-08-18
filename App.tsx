@@ -23,7 +23,8 @@ export default function App() {
 
   const handleEqual = () => {
     const num1 = parseFloat(firstValue);
-    const num2 = parseFloat(displayValue);
+    const num2 = parseFloat(displayValue); 
+    const num3 = parseFloat(displayValue); 
 
     if (operator === '/' && num2 === 0) {
       setDisplayValue('Error');
